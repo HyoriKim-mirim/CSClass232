@@ -11,7 +11,7 @@ namespace CSClass232
         public T Value;
         public Wanted(T value)
         {
-            this.Value = Value;
+            this.Value = value;
         }
     }
 }
