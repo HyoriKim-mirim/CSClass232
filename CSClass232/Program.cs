@@ -1,21 +1,26 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using Microsoft.Azure.Documents.Spatial;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CSClass232
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
-        {
+        { 
             Wanted<String> wantedString = new Wanted<string>("String");
             Wanted<int> wantedInt = new Wanted<int>(52273);
             Wanted<double> wantedDouble = new Wanted<double>(52.273);
 
             Console.WriteLine(wantedString.Value);
-            Console.WriteLine(wantedInt.Value);            
+            Console.WriteLine(wantedInt.Value);
             Console.WriteLine(wantedDouble.Value);
 
             Products p = new Products();
@@ -28,7 +33,7 @@ namespace CSClass232
             bool result = int.TryParse(Console.ReadLine(), out output);
             if (result)
             {
-                Console.WriteLine("입력한 숫자 : "+ output);
+                Console.WriteLine("입력한 숫자 : " + output);
             }
             else
             {
@@ -41,11 +46,86 @@ namespace CSClass232
             Console.WriteLine("현재 좌표 : (" + x + ", " + y + ")");
             NextPos(x, y, vx, vy, out x, out y);
             Console.WriteLine("다음 좌표 : (" + x + ", " + y + ")");
+
+            Point point;
+            point.x = 10;
+            point.y = 10;
+            point = new Point(100, 200);
+            Console.WriteLine(point.x + "/" + point.y);
+
+            PointClass pointClassA = new PointClass(10, 20);
+            PointClass pointClassB = pointClassA;
+
+            pointClassB.x = 100;
+            pointClassB.y = 200;
+
+            Console.WriteLine("pointClassA: " + pointClassA.x + ", " + pointClassA.y);
+            Console.WriteLine("pointClassB: " + pointClassB.x + ", " + pointClassB.y);
+
+            PointStruct pointStructA = new PointStruct(10, 20);
+            PointStruct pointStructB = pointStructA;
+
+            pointStructB.x = 100;
+            pointStructB.y = 200;
+
+            Console.WriteLine("pointStructA: " + pointStructA.x + ", " + pointStructA.y);
+            Console.WriteLine("pointStructB: " + pointStructB.x + ", " + pointStructB.y);
+
         }
         static void NextPos(int x, int y, int vx, int vy, out int rx, out int ry)
         {
             rx = x + vx;
             ry = y + vy;
         }
+
+        struct PointClass
+        {
+            public int x;
+            public int y;
+
+            public PointClass(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
+        struct PointStruct
+        {
+            public int x;
+            public int y;
+
+            public PointStruct(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        struct Point
+        {
+            public int x;
+            public int y;
+            public string testA;
+            public string testB;
+
+            public Point(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+                this.testA = "초기화";
+                this.testB = "초기화";
+            }
+            public Point(int x, int y, string s)
+            {
+                this.x = x;
+                this.y = y;
+                testA = s; 
+                testB = s;
+            }
+
+        }
+
     }
+
+
 }
