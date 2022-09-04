@@ -82,6 +82,12 @@ namespace CSClass232
                     Console.WriteLine(item);
                 }
             }
+
+            IBasic test = new TestClass();
+            test.TestProperty = 3;
+            test.TestInstanceMethod();
+            //test.foobar();
+            (test as TestClass).foobar();
         }
         static void NextPos(int x, int y, int vx, int vy, out int rx, out int ry)
         {
@@ -133,7 +139,7 @@ namespace CSClass232
                 testA = s;
                 testB = s;
             }
-
+     
         }
 
         class Dummy : IDisposable
@@ -143,7 +149,25 @@ namespace CSClass232
                 Console.WriteLine("Dispose() 메서드를 호출했습니다.");
             }
         }
+        
+        class TestClass : IBasic
+        {
+            public int foobar()
+            {
+                return -1;
+            }
+            public int TestProperty
+            {
+                get=>throw new NotImplementedException();
+                set=>throw new NotImplementedException();
+            }
 
+            public int TestInstanceMethod()
+            {
+                throw new NotImplementedException();
+            }
+        }
+        
 
     }
 
